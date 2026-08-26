@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Foundation — Mentorship by The Founder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pitch: #1F3D2B;
+    --pitch-dark: #142A1D;
+    --chalk: #F7F5EF;
+    --ochre: #B8863B;
+    --ochre-bright: #D6A85C;
+    --slate: #4A5A52;
+    --ink: #1B1D1A;
+    --line: rgba(247,245,239,0.14);
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    background: var(--chalk);
+    color: var(--ink);
+    font-family: 'Newsreader', serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x:hidden;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    *{ animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; }
+  }
+  a{ color:inherit; }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.7rem;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color: var(--ochre);
+    font-weight:600;
+  }
+  h1,h2,h3{
+    font-family:'Anton', sans-serif;
+    font-weight:400;
+    letter-spacing:0.01em;
+    text-transform:uppercase;
+    line-height:1.02;
+  }
+  .container{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 32px;
+  }
+
+  /* ---------- REVEAL ---------- */
+  .reveal{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+  .reveal-stagger > *{ opacity:0; transform:translateY(20px); transition:opacity .6s ease, transform .6s ease; }
+  .reveal-stagger.in > *{ opacity:1; transform:translateY(0); }
+  .reveal-stagger.in > *:nth-child(1){ transition-delay:0.05s; }
+  .reveal-stagger.in > *:nth-child(2){ transition-delay:0.15s; }
+  .reveal-stagger.in > *:nth-child(3){ transition-delay:0.25s; }
+  .reveal-stagger.in > *:nth-child(4){ transition-delay:0.35s; }
+  .reveal-stagger.in > *:nth-child(5){ transition-delay:0.45s; }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background: rgba(31,61,43,0.96);
+    backdrop-filter: blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  #progressBar{
+    position:sticky; top:0; z-index:51; height:3px; width:0%;
+    background: linear-gradient(90deg, var(--ochre), var(--ochre-bright));
+    transition: width .1s linear;
+  }
+  .nav-inner{
+    max-width:1080px; margin:0 auto; padding:16px 32px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .nav-mark{
+    font-family:'Anton', sans-serif; color:var(--chalk); font-size:1.05rem;
+    letter-spacing:0.02em; text-transform:uppercase;
+    display:flex; align-items:center; gap:10px;
+  }
+  .nav-mark .num{
+    font-family:'IBM Plex Mono', monospace;
+    color: var(--ochre-bright); font-size:0.75rem; border:1px solid var(--ochre-bright);
+    padding:2px 6px; border-radius:2px;
+  }
+  .nav-links{ display:flex; gap:28px; }
+  .nav-links a{
+    font-family:'IBM Plex Mono', monospace; font-size:0.72rem;
+    letter-spacing:0.12em; text-transform:uppercase; color:var(--chalk);
+    text-decoration:none; opacity:0.75; transition:opacity .2s;
+    position:relative;
+  }
+  .nav-links a::after{
+    content:""; position:absolute; left:0; bottom:-4px; width:0; height:1px;
+    background:var(--ochre-bright); transition:width .25s;
+  }
+  .nav-links a:hover{ opacity:1; color:var(--ochre-bright); }
+  .nav-links a:hover::after{ width:100%; }
+  .nav-links a.active{ opacity:1; color:var(--ochre-bright); }
+  .nav-links a.active::after{ width:100%; }
+  .nav-toggle{ display:none; background:none; border:none; color:var(--chalk); font-size:1.4rem; cursor:pointer; }
+
+  @media (max-width:720px){
+    .nav-links{
+      position:absolute; top:100%; left:0; right:0;
+      background:var(--pitch); flex-direction:column; gap:0;
+      max-height:0; overflow:hidden; transition:max-height .3s ease;
+      border-bottom:1px solid var(--line);
+    }
+    .nav-links.open{ max-height:320px; }
+    .nav-links a{ padding:14px 32px; border-top:1px solid var(--line); opacity:1; }
+    .nav-toggle{ display:block; }
+  }
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    background:
+      radial-gradient(circle at 85% 15%, rgba(214,168,92,0.16), transparent 45%),
+      repeating-linear-gradient(180deg, var(--pitch) 0px, var(--pitch) 68px, var(--pitch-dark) 68px, var(--pitch-dark) 136px);
+    color: var(--chalk);
+    padding:88px 0 96px;
+    position:relative;
+    border-bottom:6px solid var(--ochre);
+    overflow:hidden;
+  }
+  header.hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image: linear-gradient(rgba(247,245,239,0.05) 1px, transparent 1px);
+    background-size: 100% 8px;
+    pointer-events:none;
+  }
+  .hero-ball{
+    position:absolute; right:-60px; top:20px; width:340px; height:340px;
+    border:1px solid rgba(214,168,92,0.22); border-radius:50%;
+    animation: spin 60s linear infinite;
+    pointer-events:none;
+  }
+  .hero-ball::before, .hero-ball::after{
+    content:""; position:absolute; inset:0; border-radius:50%;
+    border:1px solid rgba(214,168,92,0.12);
+  }
+  .hero-ball::before{ transform:scale(0.7); }
+  .hero-ball::after{ transform:scale(0.4); }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+
+  .hero-inner{ position:relative; z-index:1; }
+  .hero-tag{ margin-bottom:22px; }
+  .hero h1{
+    font-size:clamp(2.6rem, 7vw, 5.2rem);
+    color:var(--chalk);
+    max-width:760px;
+    opacity:0;
+    animation: rise 0.7s ease-out 0.1s forwards;
+  }
+  .hero h1 span{ color:var(--ochre-bright); }
+  .hero p.lede{
+    font-family:'Newsreader', serif;
+    font-style:italic;
+    font-size:1.18rem;
+    color: rgba(247,245,239,0.82);
+    max-width:520px;
+    margin-top:22px;
+    opacity:0;
+    animation: rise 0.7s ease-out 0.3s forwards;
+  }
+  @keyframes rise{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);} }
+
+  .hero-stats{
+    margin-top:52px;
+    display:grid;
+    grid-template-columns:repeat(3, auto);
+    gap:0;
+    border-top:1px solid var(--line);
+    padding-top:24px;
+    max-width:760px;
+    opacity:0;
+    animation: rise 0.7s ease-out 0.5s forwards;
+  }
+  .stat{ padding-right:28px; max-width:220px; }
+  .scroll-cue{
+    margin-top:56px; display:flex; align-items:center; gap:10px;
+    font-family:'IBM Plex Mono', monospace; font-size:0.66rem; letter-spacing:0.14em;
+    text-transform:uppercase; color:rgba(247,245,239,0.5);
+  }
+  .scroll-line{
+    width:1px; height:34px; background:linear-gradient(180deg, var(--ochre-bright), transparent);
+    position:relative; overflow:hidden;
+  }
+  .scroll-line::after{
+    content:""; position:absolute; left:0; top:-100%; width:100%; height:100%;
+    background:var(--ochre-bright);
+    animation: scrollDown 2s ease-in-out infinite;
+  }
+  @keyframes scrollDown{ 0%{ top:-100%; } 60%{ top:100%; } 100%{ top:100%; } }
+  .stat .n{
+    font-family:'IBM Plex Mono', monospace; font-size:1.6rem; font-weight:600;
+    color:var(--ochre-bright);
+  }
+  .stat .l{
+    font-family:'IBM Plex Mono', monospace; font-size:0.62rem;
+    letter-spacing:0.1em; text-transform:uppercase; color:rgba(247,245,239,0.6);
+    margin-top:4px;
+  }
+  @media (max-width:640px){
+    .hero-stats{ grid-template-columns:repeat(1,auto); row-gap:20px; }
+    .scroll-cue{ display:none; }
+  }
+
+  /* ---------- CORE VALUES ---------- */
+  .values{ background:var(--chalk); padding-bottom:60px; }
+  .values-intro{ max-width:680px; margin-bottom:40px; }
+  .values-intro p{ font-family:'Newsreader', serif; color:var(--slate); font-size:1.08rem; line-height:1.65; }
+  .values-intro p strong{ color:var(--pitch); font-weight:600; }
+  .values-grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:1px; background:rgba(31,61,43,0.14); border:1px solid rgba(31,61,43,0.14); }
+  @media (max-width:820px){ .values-grid{ grid-template-columns:repeat(2, 1fr); } }
+  @media (max-width:480px){ .values-grid{ grid-template-columns:1fr; } }
+  .value-card{ background:var(--chalk); padding:28px 24px; transition:background .25s, transform .25s; }
+  .value-card:hover{ background:#fff; transform:translateY(-3px); }
+  .value-card .vnum{ font-family:'IBM Plex Mono', monospace; font-size:0.7rem; color:var(--ochre); letter-spacing:0.1em; }
+  .value-card h3{
+    font-family:'Newsreader', serif; font-weight:600; text-transform:none; letter-spacing:0;
+    font-size:1.1rem; color:var(--pitch); margin-top:10px;
+  }
+  .value-card p{ color:var(--slate); font-size:0.9rem; line-height:1.55; margin-top:8px; }
+
+  /* ---------- SECTION shared ---------- */
+  section{ padding:88px 0; }
+  .section-head{ margin-bottom:44px; max-width:640px; }
+  .section-head h2{ font-size:clamp(1.9rem, 4vw, 2.7rem); margin-top:12px; color:var(--pitch); }
+  .section-head p{ font-family:'Newsreader', serif; color:var(--slate); font-size:1.05rem; margin-top:14px; line-height:1.6; }
+
+  /* ---------- QUOTE BANDS ---------- */
+  .quote-band{
+    background: var(--ochre);
+    color: var(--pitch-dark);
+    padding:44px 0;
+    text-align:center;
+    border-top:1px solid rgba(20,42,29,0.15);
+    border-bottom:1px solid rgba(20,42,29,0.15);
+  }
+  .quote-band blockquote{
+    font-family:'Newsreader', serif; font-style:italic; font-weight:500;
+    font-size:clamp(1.15rem, 2.6vw, 1.55rem);
+    max-width:680px; margin:0 auto; line-height:1.5;
+  }
+  .quote-band cite{
+    display:block; margin-top:14px; font-family:'IBM Plex Mono', monospace;
+    font-style:normal; font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase;
+    opacity:0.75;
+  }
+  .quote-band.dark{
+    background: var(--pitch-dark); color:var(--chalk);
+  }
+
+  /* ---------- STORY / JOURNEY ---------- */
+  .story{ background:var(--chalk); }
+  .timeline{
+    display:flex; flex-direction:column; gap:0;
+    border-left:2px solid var(--ochre);
+    margin-left:6px;
+  }
+  .t-item{
+    position:relative;
+    padding:0 0 40px 32px;
+  }
+  .t-item:last-child{ padding-bottom:0; }
+  .t-item::before{
+    content:"";
+    position:absolute; left:-7px; top:4px;
+    width:12px; height:12px; border-radius:50%;
+    background: var(--chalk); border:2px solid var(--ochre);
+    transition: transform .3s, background .3s;
+  }
+  .t-item:hover::before{ transform:scale(1.3); background:var(--ochre-bright); }
+  .t-year{
+    font-family:'IBM Plex Mono', monospace; font-size:0.72rem;
+    letter-spacing:0.1em; color:var(--ochre); font-weight:600;
+  }
+  .t-item h3{
+    font-family:'Newsreader', serif; font-weight:600; font-style:normal;
+    text-transform:none; letter-spacing:0; font-size:1.18rem;
+    color:var(--pitch); margin-top:6px;
+  }
+  .t-item p{ color:var(--slate); font-size:0.98rem; line-height:1.6; margin-top:6px; max-width:560px; }
+
+  /* Progress chart inside journey */
+  .progress-block{
+    margin-top:10px;
+    background:#fff; border:1px solid rgba(31,61,43,0.14);
+    padding:26px 26px 20px;
+    max-width:560px;
+  }
+  .progress-block .eyebrow{ margin-bottom:16px; display:block; }
+  .bars{ display:flex; align-items:flex-end; gap:26px; height:150px; }
+  .bar-col{ display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; flex:1; }
+  .bar-val{
+    font-family:'IBM Plex Mono', monospace; font-weight:600; font-size:0.95rem;
+    color:var(--pitch); margin-bottom:8px; opacity:0; transition:opacity .4s;
+  }
+  .bar-col.in .bar-val{ opacity:1; }
+  .bar{
+    width:100%; max-width:52px; background: linear-gradient(180deg, var(--ochre-bright), var(--ochre));
+    height:0; border-radius:3px 3px 0 0; transition: height 1s cubic-bezier(.2,.9,.3,1);
+  }
+  .bar-col.in .bar{ }
+  .bar-label{
+    margin-top:10px; font-family:'IBM Plex Mono', monospace; font-size:0.66rem;
+    letter-spacing:0.08em; text-transform:uppercase; color:var(--slate);
+  }
+
+  /* ---------- PILLARS ---------- */
+  .pillars{ background:var(--pitch-dark); color:var(--chalk); }
+  .pillars .section-head h2{ color:var(--chalk); }
+  .pillars .section-head p{ color:rgba(247,245,239,0.7); }
+  .pillar-grid{
+    display:grid; grid-template-columns:repeat(2, 1fr); gap:1px;
+    background: var(--line);
+    border:1px solid var(--line);
+  }
+  @media (max-width:720px){ .pillar-grid{ grid-template-columns:1fr; } }
+  .pillar{
+    background: var(--pitch-dark);
+    padding:34px 30px;
+    transition: background .25s, transform .25s;
+  }
+  .pillar:hover{ background: rgba(184,134,59,0.1); transform:translateY(-3px); }
+  .pillar .pos{
+    font-family:'IBM Plex Mono', monospace; font-size:0.68rem;
+    color:var(--ochre-bright); letter-spacing:0.1em;
+  }
+  .pillar h3{
+    font-family:'Newsreader', serif; font-weight:600; text-transform:none;
+    letter-spacing:0; font-size:1.28rem; margin-top:10px; color:var(--chalk);
+  }
+  .pillar p{ color:rgba(247,245,239,0.68); font-size:0.95rem; line-height:1.6; margin-top:10px; }
+
+  /* ---------- WHO IT'S FOR ---------- */
+  .audience{ background:var(--chalk); }
+  .audience-grid{
+    display:grid; grid-template-columns:repeat(2, 1fr); gap:22px;
+  }
+  @media (max-width:820px){ .audience-grid{ grid-template-columns:1fr; } }
+  .audience-card{
+    border:1px solid rgba(31,61,43,0.16);
+    padding:30px 26px;
+    background:#fff;
+    transition: box-shadow .25s, transform .25s, border-color .25s;
+  }
+  .audience-card:hover{
+    transform:translateY(-4px);
+    box-shadow: 0 14px 30px rgba(31,61,43,0.1);
+    border-color: var(--ochre);
+  }
+  .audience-card .tag{
+    font-family:'IBM Plex Mono', monospace; font-size:0.66rem; letter-spacing:0.1em;
+    text-transform:uppercase; color:var(--ochre); font-weight:600;
+  }
+  .audience-card h3{
+    font-family:'Newsreader', serif; font-weight:600; text-transform:none; letter-spacing:0;
+    font-size:1.22rem; color:var(--pitch); margin-top:10px;
+  }
+  .audience-card p{ color:var(--slate); font-size:0.94rem; line-height:1.6; margin-top:10px; }
+
+  /* ---------- PHOTO GALLERY ---------- */
+  .gallery{ background:var(--chalk); padding-top:0; }
+  .gallery-grid{
+    display:grid; grid-template-columns:1.3fr 1fr; grid-template-rows:1fr 1fr; gap:14px;
+    height:520px;
+  }
+  .gallery-grid img{
+    width:100%; height:100%; object-fit:cover; display:block;
+    filter:saturate(1.05);
+    transition: transform .5s ease;
+  }
+  .g-item{ overflow:hidden; position:relative; }
+  .g-item:hover img{ transform:scale(1.05); }
+  .g-item.tall{ grid-row:1 / 3; }
+  .g-caption{
+    position:absolute; left:0; right:0; bottom:0;
+    background:linear-gradient(0deg, rgba(20,42,29,0.85), transparent);
+    color:var(--chalk); padding:18px 20px 14px;
+    font-family:'IBM Plex Mono', monospace; font-size:0.68rem; letter-spacing:0.08em; text-transform:uppercase;
+  }
+  @media (max-width:720px){
+    .gallery-grid{ grid-template-columns:1fr; grid-template-rows:auto; height:auto; }
+    .g-item.tall{ grid-row:auto; height:280px; }
+    .g-item{ height:220px; }
+  }
+
+  /* ---------- SEASON ZERO ---------- */
+  .pilot{ background:var(--pitch-dark); color: var(--chalk); }
+  .pilot .section-head h2{ color:var(--chalk); }
+  .pilot .section-head p{ color:rgba(247,245,239,0.7); }
+  .pilot-card{
+    border:1px solid rgba(247,245,239,0.16);
+    background: rgba(247,245,239,0.03);
+    padding:40px;
+    display:flex; flex-wrap:wrap; gap:32px; justify-content:space-between; align-items:center;
+  }
+  .pilot-badge{
+    font-family:'IBM Plex Mono', monospace; font-size:0.68rem;
+    letter-spacing:0.1em; text-transform:uppercase;
+    background: var(--ochre); color:var(--pitch-dark);
+    padding:5px 12px; border-radius:2px; display:inline-block; font-weight:600;
+  }
+  .pilot-card h3{
+    font-family:'Newsreader', serif; font-weight:600; text-transform:none;
+    letter-spacing:0; font-size:1.4rem; color:var(--chalk); margin-top:14px; max-width:420px;
+  }
+  .pilot-card p{ color:rgba(247,245,239,0.68); margin-top:10px; max-width:420px; line-height:1.6; }
+  .pilot-meta{
+    font-family:'IBM Plex Mono', monospace; font-size:0.78rem; color:var(--chalk);
+    display:flex; flex-direction:column; gap:8px; min-width:180px;
+  }
+  .pilot-meta div span{ color:rgba(247,245,239,0.55); }
+
+  /* ---------- CONTACT ---------- */
+  .contact{
+    background: var(--pitch);
+    color:var(--chalk);
+    text-align:center;
+    padding:96px 0 80px;
+  }
+  .contact h2{ font-size:clamp(2rem, 5vw, 3.2rem); color:var(--chalk); }
+  .contact p.sub{ font-family:'Newsreader', serif; font-style:italic; color:rgba(247,245,239,0.75); margin-top:16px; max-width:480px; margin-left:auto; margin-right:auto; }
+
+  .form-wrap{ max-width:460px; margin:44px auto 0; text-align:left; }
+  .form-row{ margin-bottom:16px; }
+  .form-row label{
+    display:block; font-family:'IBM Plex Mono', monospace; font-size:0.68rem;
+    letter-spacing:0.1em; text-transform:uppercase; color:var(--ochre-bright); margin-bottom:6px;
+  }
+  .form-row input, .form-row select, .form-row textarea{
+    width:100%; padding:12px 14px; background:rgba(247,245,239,0.06);
+    border:1px solid rgba(247,245,239,0.25); color:var(--chalk);
+    font-family:'Newsreader', serif; font-size:0.98rem; border-radius:2px;
+  }
+  .form-row textarea{ resize:vertical; min-height:80px; }
+  .form-row input:focus, .form-row select:focus, .form-row textarea:focus{
+    outline:2px solid var(--ochre-bright); outline-offset:1px; border-color:var(--ochre-bright);
+  }
+  .submit-btn{
+    width:100%; padding:14px; margin-top:6px;
+    background:var(--ochre); color:var(--pitch-dark); border:none;
+    font-family:'IBM Plex Mono', monospace; font-size:0.78rem; letter-spacing:0.1em;
+    text-transform:uppercase; font-weight:600; border-radius:2px; cursor:pointer;
+    transition: background .2s, transform .15s;
+  }
+  .submit-btn:hover{ background: var(--ochre-bright); transform:translateY(-1px); }
+  .form-note{
+    margin-top:14px; font-family:'IBM Plex Mono', monospace; font-size:0.72rem;
+    color:rgba(247,245,239,0.6); text-align:center; display:none; line-height:1.5;
+  }
+  .form-note.show{ display:block; }
+
+  .socials{ margin-top:56px; display:flex; gap:26px; justify-content:center; flex-wrap:wrap; }
+  .socials a{
+    font-family:'IBM Plex Mono', monospace; font-size:0.75rem; letter-spacing:0.08em;
+    text-transform:uppercase; text-decoration:none; color:var(--chalk);
+    border-bottom:1px solid var(--ochre); padding-bottom:3px; opacity:0.85; transition:opacity .2s, border-color .2s;
+  }
+  .socials a:hover{ opacity:1; color:var(--ochre-bright); border-color:var(--ochre-bright); }
+
+  footer{
+    background: var(--pitch-dark); color:rgba(247,245,239,0.5);
+    text-align:center; padding:24px 0;
+    font-family:'IBM Plex Mono', monospace; font-size:0.68rem; letter-spacing:0.06em;
+  }
+
+  /* back to top */
+  #toTop{
+    position:fixed; bottom:24px; right:24px; z-index:60;
+    width:42px; height:42px; border-radius:50%;
+    background:var(--ochre); color:var(--pitch-dark); border:none;
+    font-size:1.1rem; cursor:pointer; opacity:0; pointer-events:none;
+    transition:opacity .3s, transform .2s;
+    display:flex; align-items:center; justify-content:center;
+  }
+  #toTop.show{ opacity:1; pointer-events:auto; }
+  #toTop:hover{ transform:translateY(-3px); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-mark">THE FOUNDATION <span class="num">CO</span></div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#values">Values</a>
+      <a href="#story">Journey</a>
+      <a href="#pillars">Program</a>
+      <a href="#audience">Who It's For</a>
+      <a href="#pilot">Season Zero</a>
+      <a href="#contact">Get Involved</a>
+    </div>
+  </div>
+</nav>
+<div id="progressBar"></div>
+
+<header class="hero">
+  <div class="hero-ball"></div>
+  <div class="container hero-inner">
+    <div class="eyebrow hero-tag">Mentorship &nbsp;·&nbsp; Kabras RFC</div>
+    <h1>Every starter<br>was once<br><span>a walk-on.</span></h1>
+    <p class="lede">The Foundation is the founder's mentorship program for young rugby players — built on the same road that took him from a high school pitch to a Kabras RFC starting jersey. At its core: a player's education matters as much as his game.</p>
+
+    <div class="hero-stats">
+      <div class="stat"><div class="n" data-count="3">0</div><div class="l">Kenya Cup Champion</div></div>
+      <div class="stat"><div class="n" data-count="3">0</div><div class="l">Enterprise Cup Champion</div></div>
+      <div class="stat"><div class="n" data-count="133">0</div><div class="l">Kenya Cup Top Point Scorer, 2025/26 Season</div></div>
+    </div>
+    <div class="scroll-cue reveal">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </div>
+</header>
+
+<div class="quote-band">
+  <div class="container">
+    <blockquote>"Now faith is the substance of things hoped for, the evidence of things not seen."</blockquote>
+    <cite>Hebrews 11:1</cite>
+  </div>
+</div>
+
+<section class="values" id="values">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">What This Program Stands For</div>
+      <h2>The book and the boot, both looked after.</h2>
+    </div>
+    <div class="values-intro reveal">
+      <p>A player's passion for the game and a player's education are not competing priorities here — <strong>they're both non-negotiable.</strong> The Foundation is built so players keep chasing the game hard, while coaches, teachers, and guardians can trust that nothing else is being sacrificed to do it.</p>
+    </div>
+    <div class="values-grid reveal-stagger">
+      <div class="value-card">
+        <div class="vnum">01</div>
+        <h3>Education first</h3>
+        <p>Schoolwork isn't an afterthought to training — it's treated as part of the program, not competition for it.</p>
+      </div>
+      <div class="value-card">
+        <div class="vnum">02</div>
+        <h3>Passion for the game</h3>
+        <p>The drive that gets a player up for early training stays protected and encouraged, never traded away.</p>
+      </div>
+      <div class="value-card">
+        <div class="vnum">03</div>
+        <h3>Discipline &amp; character</h3>
+        <p>The habits that carry a player from the bench to a starting jersey — shown, not just told.</p>
+      </div>
+      <div class="value-card">
+        <div class="vnum">04</div>
+        <h3>Faith-guided</h3>
+        <p>Grounded in faith and grace, giving players something steady to build both their game and their life on.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="story" id="story">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">The Journey</div>
+      <h2>Nobody starts in the first team.</h2>
+      <p>Every session in The Foundation is built on ground Cantona has actually walked — not theory borrowed from somewhere else.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="t-item reveal">
+        <div class="t-year">2018</div>
+        <h3>First boots, fresh from high school</h3>
+        <p>Picked up rugby straight out of school — no academy, no shortcut, just the start of it.</p>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-year">2018 – 2023</div>
+        <h3>Masinde Muliro University — Biochemistry &amp; the university team</h3>
+        <p>Studied Biochemistry while working up through the university rugby ranks, reaching the main team by the third and fourth years — proof the books and the boots can share a schedule.</p>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-year">Year One at Kabras</div>
+        <h3>Second team, first cameos</h3>
+        <p>Arrived at Kabras RFC to a squad full of players who'd worn the national jersey. Spent the first season earning minutes, not given them — closing the year with 43 points.</p>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-year">Years Two &amp; Three</div>
+        <h3>A starting jersey, then the top of the table</h3>
+        <p>Sealed a starting position, nearly doubling his output to 99 points in year two. In the third season, started 13 of 14 games and finished as the league's top point scorer with 133 points.</p>
+
+        <div class="progress-block reveal">
+          <span class="eyebrow">Points Per Season — The Climb</span>
+          <div class="bars" id="progressBars">
+            <div class="bar-col" data-value="43" data-max="133">
+              <div class="bar-val">43</div>
+              <div class="bar"></div>
+              <div class="bar-label">Season 1</div>
+            </div>
+            <div class="bar-col" data-value="99" data-max="133">
+              <div class="bar-val">99</div>
+              <div class="bar"></div>
+              <div class="bar-label">Season 2</div>
+            </div>
+            <div class="bar-col" data-value="133" data-max="133">
+              <div class="bar-val">133</div>
+              <div class="bar"></div>
+              <div class="bar-label">Season 3</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="t-item reveal">
+        <div class="t-year">Now</div>
+        <h3>Building The Foundation</h3>
+        <p>Turning that road into a program — so the next player climbing it doesn't have to figure out every step alone.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pillars" id="pillars">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">The Program</div>
+      <h2>Four things every young player needs — and rarely gets taught together.</h2>
+    </div>
+
+    <div class="pillar-grid reveal-stagger">
+      <div class="pillar">
+        <div class="pos">01 — On the field</div>
+        <h3>Rugby skills &amp; technique</h3>
+        <p>Core technical work — handling, positioning, decision-making — built from match-level experience, not a textbook.</p>
+      </div>
+      <div class="pillar">
+        <div class="pos">02 — Between the ears</div>
+        <h3>Mindset &amp; discipline</h3>
+        <p>What it actually takes to go from the second team to a starting jersey — told straight, with the setbacks left in.</p>
+      </div>
+      <div class="pillar">
+        <div class="pos">03 — Off the field</div>
+        <h3>Education &amp; career, alongside the game</h3>
+        <p>Education isn't set aside for rugby here — it's carried alongside it. Practical guidance on keeping a degree or schoolwork moving at the same pace as the game, drawn from actually doing both at once.</p>
+      </div>
+      <div class="pillar">
+        <div class="pos">04 — The engine</div>
+        <h3>Fitness &amp; conditioning</h3>
+        <p>Foundational conditioning principles a young player can actually keep up between sessions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="quote-band dark">
+  <div class="container">
+    <blockquote>Guided by grace, fueled by faith.</blockquote>
+  </div>
+</div>
+
+<section class="gallery">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">On The Field</div>
+      <h2>The work behind the words.</h2>
+    </div>
+    <div class="gallery-grid reveal">
+      <div class="g-item tall">
+        <img src="action-kick.jpg" alt="The founder taking a kick during a Kabras RFC match" loading="lazy">
+        <div class="g-caption">Match day — Kabras RFC</div>
+      </div>
+      <div class="g-item">
+        <img src="trophy.jpg" alt="The founder holding the Kenya Cup Top Point Scorer award" loading="lazy">
+        <div class="g-caption">Kenya Cup — Top Point Scorer</div>
+      </div>
+      <div class="g-item">
+        <img src="action-throw.jpg" alt="The founder directing play on the pitch" loading="lazy">
+        <div class="g-caption">Reading the game</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="audience" id="audience">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Who It's For</div>
+      <h2>Built to be worth it for everyone at the table.</h2>
+      <p>The Foundation isn't just for players on the pitch — it's built around the people already shaping them, so it's worth trusting from every side.</p>
+    </div>
+
+    <div class="audience-grid reveal-stagger">
+      <div class="audience-card">
+        <div class="tag">Players</div>
+        <h3>For the player</h3>
+        <p>Real coaching from someone who made the climb, plus the reassurance that chasing the game hard won't cost you your schoolwork or your future.</p>
+      </div>
+      <div class="audience-card">
+        <div class="tag">Educators</div>
+        <h3>For coaches &amp; teachers</h3>
+        <p>Brought in as partners, not bystanders — a program that reinforces the discipline and standards already being built in the classroom and at training.</p>
+      </div>
+      <div class="audience-card">
+        <div class="tag">Guardians</div>
+        <h3>For parents &amp; guardians</h3>
+        <p>Peace of mind that your child's education stays protected — this program backs the game and the books equally, with someone accountable behind both.</p>
+      </div>
+      <div class="audience-card">
+        <div class="tag">Next Step Up</div>
+        <h3>For campus students</h3>
+        <p>University players navigating the exact balancing act the founder managed at Masinde Muliro — rugby and a degree, at the same time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pilot" id="pilot">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="eyebrow">Where Things Stand</div>
+      <h2>Currently piloting.</h2>
+    </div>
+
+    <div class="pilot-card reveal">
+      <div>
+        <span class="pilot-badge">Season Zero — In Planning</span>
+        <h3>A small pilot group before The Foundation opens more widely</h3>
+        <p>The program is being tested first with a small group, one season, before it takes on a fixed name and structure — so what launches publicly is proven, not just promised.</p>
+      </div>
+      <div class="pilot-meta">
+        <div>Group size <span>8–12 players</span></div>
+        <div>Length <span>6–8 weeks</span></div>
+        <div>Cadence <span>Weekly, ~90 min</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="container">
+    <div class="eyebrow">Get Involved</div>
+    <h2>Know a player, coach, or student who needs this?</h2>
+    <p class="sub">Leave your details and the founder will reach out about the next intake.</p>
+
+    <form class="form-wrap" id="interestForm">
+      <div class="form-row">
+        <label for="name">Full name</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-row">
+        <label for="email">Email or phone</label>
+        <input type="text" id="email" name="email" required>
+      </div>
+      <div class="form-row">
+        <label for="role">I am a...</label>
+        <select id="role" name="role">
+          <option>Player — High School</option>
+          <option>Player — Campus</option>
+          <option>Parent / Guardian</option>
+          <option>Coach</option>
+          <option>Teacher</option>
+          <option>School / Club representative</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label for="message">Message (optional)</label>
+        <textarea id="message" name="message" placeholder="Tell us a bit more..."></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Register interest</button>
+      <div class="form-note" id="formNote"></div>
+    </form>
+
+    <div class="socials">
+      <a href="https://instagram.com/cantona_ouko" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://tiktok.com/@cantona_10" target="_blank" rel="noopener">TikTok</a>
+      <a href="#" target="_blank" rel="noopener">Twitter</a>
+      <a href="mailto:cantonaericouko@gmail.com">Email</a>
+    </div>
+  </div>
+</section>
+
+<footer>THE FOUNDATION &nbsp;·&nbsp; MENTORSHIP BY THE FOUNDER &nbsp;·&nbsp; KABRAS RFC</footer>
+
+<button id="toTop" aria-label="Back to top">↑</button>
+
+<script>
+  // mobile nav
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+
+  // animated stat counters
+  const counters = document.querySelectorAll('.hero-stats .n');
+  const counterIO = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        const el = entry.target;
+        const target = parseInt(el.getAttribute('data-count'), 10);
+        const noComma = el.getAttribute('data-nocomma');
+        let cur = 0;
+        const step = Math.max(1, Math.ceil(target / 40));
+        const tick = () => {
+          cur += step;
+          if (cur >= target){ cur = target; }
+          el.textContent = noComma ? cur : cur.toLocaleString();
+          if (cur < target){ requestAnimationFrame(tick); }
+        };
+        tick();
+        counterIO.unobserve(el);
+      }
+    });
+  }, { threshold: 0.4 });
+  counters.forEach(c => counterIO.observe(c));
+
+  // progress bars (points per season)
+  const barCols = document.querySelectorAll('.bar-col');
+  const barIO = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        const col = entry.target;
+        const value = parseFloat(col.getAttribute('data-value'));
+        const max = parseFloat(col.getAttribute('data-max'));
+        const pct = Math.max(6, (value / max) * 100);
+        col.querySelector('.bar').style.height = pct + '%';
+        col.classList.add('in');
+        barIO.unobserve(col);
+      }
+    });
+  }, { threshold: 0.3 });
+  barCols.forEach(c => barIO.observe(c));
+
+  // back to top
+  const toTop = document.getElementById('toTop');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 500){ toTop.classList.add('show'); } else { toTop.classList.remove('show'); }
+  });
+  toTop.addEventListener('click', () => window.scrollTo({ top:0, behavior:'smooth' }));
+
+  // scroll progress bar
+  const progressBar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    progressBar.style.width = scrolled + '%';
+  });
+
+  // scrollspy — highlight the current section in the nav
+  const navAnchors = document.querySelectorAll('.nav-links a');
+  const spySections = Array.from(navAnchors).map(a => document.querySelector(a.getAttribute('href')));
+  const spyIO = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting){
+        const id = '#' + entry.target.id;
+        navAnchors.forEach(a => a.classList.toggle('active', a.getAttribute('href') === id));
+      }
+    });
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  spySections.forEach(s => { if (s) spyIO.observe(s); });
+
+  // contact form -> emails Cantona directly via the visitor's mail client
+  const RECIPIENT = 'cantonaericouko@gmail.com';
+  document.getElementById('interestForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const name = document.getElementById('name').value.trim();
+    const contact = document.getElementById('email').value.trim();
+    const role = document.getElementById('role').value;
+    const message = document.getElementById('message').value.trim();
+
+    const subject = encodeURIComponent(`The Foundation — Interest from ${name}`);
+    const body = encodeURIComponent(
+      `Name: ${name}\nEmail/Phone: ${contact}\nRole: ${role}\nMessage: ${message || '(none)'}`
+    );
+    window.location.href = `mailto:${RECIPIENT}?subject=${subject}&body=${body}`;
+
+    const note = document.getElementById('formNote');
+    note.textContent = 'Opening your email app to send this to the founder directly. If nothing opens, email cantonaericouko@gmail.com.';
+    note.classList.add('show');
+    this.reset();
+  });
+</script>
+
+</body>
+</html>
