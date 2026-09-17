@@ -105,6 +105,12 @@
   .nav-links a:hover::after{ width:100%; }
   .nav-links a.active{ opacity:1; color:var(--ochre-bright); }
   .nav-links a.active::after{ width:100%; }
+  .nav-links a.nav-cta{
+    opacity:1; background:var(--ochre); color:var(--pitch-dark);
+    padding:8px 16px; border-radius:2px; font-weight:600;
+  }
+  .nav-links a.nav-cta::after{ display:none; }
+  .nav-links a.nav-cta:hover{ background:var(--ochre-bright); color:var(--pitch-dark); }
   .nav-toggle{ display:none; background:none; border:none; color:var(--chalk); font-size:1.4rem; cursor:pointer; }
 
   @media (max-width:720px){
@@ -173,18 +179,24 @@
   }
   @keyframes rise{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:translateY(0);} }
 
-  .hero-stats{
-    margin-top:52px;
-    display:grid;
-    grid-template-columns:repeat(3, auto);
-    gap:0;
-    border-top:1px solid var(--line);
-    padding-top:24px;
-    max-width:760px;
+  .hero-cta{
+    margin-top:44px;
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
     opacity:0;
     animation: rise 0.7s ease-out 0.5s forwards;
   }
-  .stat{ padding-right:28px; max-width:220px; }
+  .btn-primary, .btn-secondary{
+    font-family:'IBM Plex Mono', monospace; font-size:0.78rem;
+    letter-spacing:0.1em; text-transform:uppercase; font-weight:600;
+    padding:14px 28px; border-radius:2px; text-decoration:none;
+    display:inline-block; transition: background .2s, border-color .2s, transform .15s;
+  }
+  .btn-primary{ background:var(--ochre); color:var(--pitch-dark); border:1px solid var(--ochre); }
+  .btn-primary:hover{ background:var(--ochre-bright); border-color:var(--ochre-bright); transform:translateY(-1px); }
+  .btn-secondary{ background:transparent; color:var(--chalk); border:1px solid rgba(247,245,239,0.32); font-weight:500; }
+  .btn-secondary:hover{ border-color:var(--ochre-bright); color:var(--ochre-bright); transform:translateY(-1px); }
   .scroll-cue{
     margin-top:56px; display:flex; align-items:center; gap:10px;
     font-family:'IBM Plex Mono', monospace; font-size:0.66rem; letter-spacing:0.14em;
@@ -200,17 +212,9 @@
     animation: scrollDown 2s ease-in-out infinite;
   }
   @keyframes scrollDown{ 0%{ top:-100%; } 60%{ top:100%; } 100%{ top:100%; } }
-  .stat .n{
-    font-family:'IBM Plex Mono', monospace; font-size:1.6rem; font-weight:600;
-    color:var(--ochre-bright);
-  }
-  .stat .l{
-    font-family:'IBM Plex Mono', monospace; font-size:0.62rem;
-    letter-spacing:0.1em; text-transform:uppercase; color:rgba(247,245,239,0.6);
-    margin-top:4px;
-  }
   @media (max-width:640px){
-    .hero-stats{ grid-template-columns:repeat(1,auto); row-gap:20px; }
+    .hero-cta{ flex-direction:column; align-items:flex-start; }
+    .btn-primary, .btn-secondary{ width:100%; text-align:center; }
     .scroll-cue{ display:none; }
   }
 
@@ -500,7 +504,7 @@
       <a href="#pillars">Program</a>
       <a href="#audience">Who It's For</a>
       <a href="#pilot">Season Zero</a>
-      <a href="#contact">Get Involved</a>
+      <a href="#contact" class="nav-cta">Get Involved</a>
     </div>
   </div>
 </nav>
@@ -509,14 +513,13 @@
 <header class="hero">
   <div class="hero-ball"></div>
   <div class="container hero-inner">
-    <div class="eyebrow hero-tag">Mentorship &nbsp;·&nbsp; Kabras RFC</div>
+    <div class="eyebrow hero-tag">Mentorship &nbsp;·&nbsp; Rugby</div>
     <h1>Every starter<br>was once<br><span>a walk-on.</span></h1>
     <p class="lede">The Foundation is the founder's mentorship program for young rugby players — built on the same road that took him from a high school pitch to a Kabras RFC starting jersey. At its core: a player's education matters as much as his game.</p>
 
-    <div class="hero-stats">
-      <div class="stat"><div class="n" data-count="3">0</div><div class="l">Kenya Cup Champion</div></div>
-      <div class="stat"><div class="n" data-count="3">0</div><div class="l">Enterprise Cup Champion</div></div>
-      <div class="stat"><div class="n" data-count="133">0</div><div class="l">Kenya Cup Top Point Scorer, 2025/26 Season</div></div>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">Register Interest</a>
+      <a href="#pillars" class="btn-secondary">See the Program</a>
     </div>
     <div class="scroll-cue reveal">
       <span>Scroll</span>
@@ -593,7 +596,7 @@
       <div class="t-item reveal">
         <div class="t-year">Years Two &amp; Three</div>
         <h3>A starting jersey, then the top of the table</h3>
-        <p>Sealed a starting position, nearly doubling his output to 99 points in year two. In the third season, started 13 of 14 games and finished as the league's top point scorer with 133 points.</p>
+        <p>Sealed a starting position, nearly doubling his output to 99 points in year two. In the third season, started 13 of 14 games and finished as the league's top point scorer with 133 points. Those campaigns also brought team silverware — Kenya Cup and Enterprise Cup titles alongside the individual accolades.</p>
 
         <div class="progress-block reveal">
           <span class="eyebrow">Points Per Season — The Climb</span>
@@ -736,6 +739,7 @@
         <div>Group size <span>8–12 players</span></div>
         <div>Length <span>6–8 weeks</span></div>
         <div>Cadence <span>Weekly, ~90 min</span></div>
+        <a href="#contact" class="btn-primary" style="text-align:center; margin-top:6px;">Register Interest</a>
       </div>
     </div>
   </div>
@@ -778,7 +782,6 @@
     <div class="socials">
       <a href="https://instagram.com/cantona_ouko" target="_blank" rel="noopener">Instagram</a>
       <a href="https://tiktok.com/@cantona_10" target="_blank" rel="noopener">TikTok</a>
-      <a href="#" target="_blank" rel="noopener">Twitter</a>
       <a href="mailto:cantonaericouko@gmail.com">Email</a>
     </div>
   </div>
@@ -806,29 +809,6 @@
     });
   }, { threshold: 0.15 });
   revealEls.forEach(el => io.observe(el));
-
-  // animated stat counters
-  const counters = document.querySelectorAll('.hero-stats .n');
-  const counterIO = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting){
-        const el = entry.target;
-        const target = parseInt(el.getAttribute('data-count'), 10);
-        const noComma = el.getAttribute('data-nocomma');
-        let cur = 0;
-        const step = Math.max(1, Math.ceil(target / 40));
-        const tick = () => {
-          cur += step;
-          if (cur >= target){ cur = target; }
-          el.textContent = noComma ? cur : cur.toLocaleString();
-          if (cur < target){ requestAnimationFrame(tick); }
-        };
-        tick();
-        counterIO.unobserve(el);
-      }
-    });
-  }, { threshold: 0.4 });
-  counters.forEach(c => counterIO.observe(c));
 
   // progress bars (points per season)
   const barCols = document.querySelectorAll('.bar-col');
