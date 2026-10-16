@@ -95,12 +95,10 @@
   .nav-mark{
     font-family:'Anton', sans-serif; color:var(--chalk); font-size:1.05rem;
     letter-spacing:0.02em; text-transform:uppercase;
-    display:flex; align-items:center; gap:10px;
+    display:flex; align-items:center; gap:12px; text-decoration:none;
   }
-  .nav-mark .num{
-    font-family:'IBM Plex Mono', monospace;
-    color: var(--ochre-bright); font-size:0.75rem; border:1px solid var(--ochre-bright);
-    padding:2px 6px; border-radius:2px;
+  .nav-mark img{
+    width:44px; height:44px; object-fit:contain;
   }
   .nav-links{ display:flex; gap:28px; }
   .nav-links a{
@@ -487,9 +485,11 @@
 
   footer{
     background: var(--pitch-dark); color:rgba(247,245,239,0.5);
-    text-align:center; padding:24px 0;
+    display:flex; align-items:center; justify-content:center; gap:14px;
+    text-align:center; padding:24px 32px;
     font-family:'IBM Plex Mono', monospace; font-size:0.68rem; letter-spacing:0.06em;
   }
+  .footer-mark img{ display:block; width:44px; height:44px; object-fit:contain; }
 
   /* back to top */
   #toTop{
@@ -506,9 +506,12 @@
 </head>
 <body>
 
-<nav>
+<nav id="top">
   <div class="nav-inner">
-    <div class="nav-mark">THE FOUNDATION <span class="num">CO</span></div>
+    <a class="nav-mark" href="#top" aria-label="The Foundation home">
+      <img src="C.png" alt="">
+      <span>THE FOUNDATION</span>
+    </a>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
     <div class="nav-links" id="navLinks">
       <a href="#values">Values</a>
@@ -799,7 +802,10 @@
   </div>
 </section>
 
-<footer>THE FOUNDATION &nbsp;·&nbsp; MENTORSHIP BY THE FOUNDER &nbsp;·&nbsp; KABRAS RFC</footer>
+<footer>
+  <a class="footer-mark" href="#top" aria-label="The Foundation home"><img src="C.png" alt=""></a>
+  <span>THE FOUNDATION &nbsp;·&nbsp; MENTORSHIP BY THE FOUNDER &nbsp;·&nbsp; KABRAS RFC</span>
+</footer>
 
 <button id="toTop" aria-label="Back to top">↑</button>
 
