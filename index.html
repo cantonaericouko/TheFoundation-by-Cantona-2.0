@@ -89,16 +89,15 @@
     transition: width .1s linear;
   }
   .nav-inner{
-    max-width:1080px; margin:0 auto; padding:16px 32px;
-    display:flex; align-items:center; justify-content:space-between;
+    max-width:1080px; margin:0 auto; padding:10px 32px;
+    display:flex; align-items:center; justify-content:center;
   }
-  .nav-mark{
-    font-family:'Anton', sans-serif; color:var(--chalk); font-size:1.05rem;
-    letter-spacing:0.02em; text-transform:uppercase;
-    display:flex; align-items:center; gap:12px; text-decoration:none;
+  .brand-header{
+    display:flex; justify-content:center; padding:12px 24px;
   }
-  .nav-mark img{
-    width:132px; height:132px; object-fit:contain;
+  .brand-mark{ display:block; line-height:0; }
+  .brand-mark img{
+    width:180px; height:180px; object-fit:contain;
   }
   .nav-links{ display:flex; gap:28px; }
   .nav-links a{
@@ -124,6 +123,7 @@
   .nav-toggle{ display:none; background:none; border:none; color:var(--chalk); font-size:1.4rem; cursor:pointer; }
 
   @media (max-width:720px){
+    .nav-inner{ justify-content:flex-end; }
     .nav-links{
       position:absolute; top:100%; left:0; right:0;
       background:var(--pitch); flex-direction:column; gap:0;
@@ -506,12 +506,11 @@
 </head>
 <body>
 
-<nav id="top">
+<div class="brand-header" id="top">
+  <a class="brand-mark" href="#top" aria-label="The Foundation home"><img src="C.png" alt="The Foundation"></a>
+</div>
+<nav>
   <div class="nav-inner">
-    <a class="nav-mark" href="#top" aria-label="The Foundation home">
-      <img src="C.png" alt="">
-      <span>THE FOUNDATION</span>
-    </a>
     <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
     <div class="nav-links" id="navLinks">
       <a href="#values">Values</a>
