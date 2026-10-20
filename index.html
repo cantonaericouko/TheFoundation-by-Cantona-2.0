@@ -507,6 +507,33 @@
   }
   .socials a:hover{ opacity:1; color:var(--ochre-bright); border-color:var(--ochre-bright); }
 
+  /* ---------- CTA SECTION ---------- */
+  .cta-section__lead{
+    font-family:'Newsreader', serif; font-style:italic; font-size:1.2rem;
+    color:rgba(247,245,239,0.8); margin-top:16px;
+  }
+  .cta-section__actions{
+    display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-top:36px;
+  }
+  .btn{
+    font-family:'IBM Plex Mono', monospace; font-size:0.78rem;
+    letter-spacing:0.1em; text-transform:uppercase; font-weight:600;
+    padding:15px 28px; border-radius:2px; text-decoration:none;
+    display:inline-block; transition: background .2s, border-color .2s, transform .15s;
+  }
+  .btn--primary{ background:var(--ochre); color:var(--pitch-dark); border:1px solid var(--ochre); }
+  .btn--primary:hover{ background:var(--ochre-bright); border-color:var(--ochre-bright); transform:translateY(-1px); }
+  .btn--whatsapp{ background:#25D366; color:#0B2E1A; border:1px solid #25D366; }
+  .btn--whatsapp:hover{ background:#3BE07A; border-color:#3BE07A; transform:translateY(-1px); }
+  .cta-section__micro{
+    font-family:'IBM Plex Mono', monospace; font-size:0.72rem; line-height:1.7;
+    color:rgba(247,245,239,0.6); max-width:520px; margin:28px auto 0;
+  }
+  @media (max-width:560px){
+    .cta-section__actions{ flex-direction:column; }
+    .btn{ width:100%; text-align:center; }
+  }
+
   footer{
     background: var(--pitch-dark); color:rgba(247,245,239,0.5);
     display:flex; align-items:center; justify-content:center; gap:14px;
@@ -800,39 +827,38 @@
   </div>
 </section>
 
-<section class="contact" id="contact">
+<!-- ===== GET INVOLVED / CTA ===== -->
+<section id="contact" class="contact cta-section">
   <div class="container">
-    <div class="eyebrow">Get Involved</div>
-    <h2>Know a player, coach, or student who needs this?</h2>
-    <p class="sub">Leave your details and the founder will reach out about the next intake.</p>
+    <h2>Get Involved</h2>
+    <p class="cta-section__lead">
+      Know a player, coach, or student who needs this?
+    </p>
 
-    <form class="form-wrap" id="interestForm">
-      <div class="form-row">
-        <label for="name">Full name</label>
-        <input type="text" id="name" name="name" required>
-      </div>
-      <div class="form-row">
-        <label for="email">Email or phone</label>
-        <input type="text" id="email" name="email" required>
-      </div>
-      <div class="form-row">
-        <label for="role">I am a...</label>
-        <select id="role" name="role">
-          <option>Player — High School</option>
-          <option>Player — Campus</option>
-          <option>Parent / Guardian</option>
-          <option>Coach</option>
-          <option>Teacher</option>
-          <option>School / Club representative</option>
-        </select>
-      </div>
-      <div class="form-row">
-        <label for="message">Message (optional)</label>
-        <textarea id="message" name="message" placeholder="Tell us a bit more..."></textarea>
-      </div>
-      <button type="submit" class="submit-btn">Register interest</button>
-      <div class="form-note" id="formNote"></div>
-    </form>
+    <div class="cta-section__actions">
+      <a
+        class="btn btn--primary"
+        href="https://tally.so/r/YOUR_FORM_ID"
+        target="_blank"
+        rel="noopener"
+      >
+        Join the Interest List
+      </a>
+
+      <a
+        class="btn btn--whatsapp"
+        href="https://wa.me/254XXXXXXXXX?text=Hi%2C%20I%27m%20interested%20in%20The%20Foundation"
+        target="_blank"
+        rel="noopener"
+      >
+        Message the Founder on WhatsApp
+      </a>
+    </div>
+
+    <p class="cta-section__micro">
+      Small pilot group forming — one season, limited spots.
+      No commitment yet — just tell us who you are and how you're connected to the game.
+    </p>
 
     <div class="socials">
       <a href="https://instagram.com/cantona_ouko" target="_blank" rel="noopener">Instagram</a>
@@ -912,27 +938,6 @@
     });
   }, { rootMargin: '-45% 0px -45% 0px' });
   spySections.forEach(s => { if (s) spyIO.observe(s); });
-
-  // contact form -> emails Cantona directly via the visitor's mail client
-  const RECIPIENT = 'cantonaericouko@gmail.com';
-  document.getElementById('interestForm').addEventListener('submit', function(e){
-    e.preventDefault();
-    const name = document.getElementById('name').value.trim();
-    const contact = document.getElementById('email').value.trim();
-    const role = document.getElementById('role').value;
-    const message = document.getElementById('message').value.trim();
-
-    const subject = encodeURIComponent(`The Foundation — Interest from ${name}`);
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail/Phone: ${contact}\nRole: ${role}\nMessage: ${message || '(none)'}`
-    );
-    window.location.href = `mailto:${RECIPIENT}?subject=${subject}&body=${body}`;
-
-    const note = document.getElementById('formNote');
-    note.textContent = 'Opening your email app to send this to the founder directly. If nothing opens, email cantonaericouko@gmail.com.';
-    note.classList.add('show');
-    this.reset();
-  });
 </script>
 
 </body>
