@@ -507,6 +507,37 @@
   }
   .socials a:hover{ opacity:1; color:var(--ochre-bright); border-color:var(--ochre-bright); }
 
+  /* ---------- FAQ SECTION ---------- */
+  .faq-section{
+    background:var(--chalk);
+    padding:88px max(32px, calc((100% - 1016px) / 2));
+  }
+  .faq-section h2{ font-size:clamp(1.9rem, 4vw, 2.7rem); color:var(--pitch); }
+  .faq-section__note{
+    font-family:'Newsreader', serif; font-style:italic; color:var(--slate);
+    font-size:1.05rem; line-height:1.6; margin-top:14px;
+  }
+  .faq{ margin-top:36px; max-width:760px; border-top:1px solid rgba(31,61,43,0.18); }
+  .faq__item{ border-bottom:1px solid rgba(31,61,43,0.18); }
+  .faq__item summary{
+    list-style:none; cursor:pointer; position:relative;
+    padding:20px 40px 20px 0;
+    font-family:'Newsreader', serif; font-weight:600; font-size:1.18rem; color:var(--pitch);
+  }
+  .faq__item summary::-webkit-details-marker{ display:none; }
+  .faq__item summary::after{
+    content:"+"; position:absolute; right:4px; top:50%; transform:translateY(-50%);
+    font-family:'IBM Plex Mono', monospace; font-size:1.4rem; color:var(--ochre);
+    transition:transform .2s;
+  }
+  .faq__item[open] summary::after{ content:"–"; }
+  .faq__item summary:hover{ color:var(--ochre); }
+  .faq__item summary:focus-visible{ outline:2px solid var(--ochre); outline-offset:2px; }
+  .faq__item p{
+    font-family:'Newsreader', serif; color:var(--slate);
+    font-size:1.05rem; line-height:1.7; padding:0 40px 22px 0;
+  }
+
   /* ---------- CTA SECTION ---------- */
   .cta-section__lead{
     font-family:'Newsreader', serif; font-style:italic; font-size:1.2rem;
@@ -824,6 +855,78 @@
         <a href="#contact" class="btn-primary" style="text-align:center; margin-top:6px;">Register Interest</a>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section id="faq" class="faq-section">
+  <h2>Questions</h2>
+  <p class="faq-section__note">
+    Pilot dates and venue details will be posted here once confirmed.
+  </p>
+
+  <div class="faq">
+    <details class="faq__item">
+      <summary>Is The Foundation free?</summary>
+      <p>
+        The pilot season is being run at no cost to participating players.
+        Any future costs will be communicated clearly before anything is confirmed —
+        nothing is charged without your knowledge.
+      </p>
+    </details>
+
+    <details class="faq__item">
+      <summary>Who can join?</summary>
+      <p>
+        Young rugby players — primarily high school and campus-level — who are serious
+        about the game and willing to keep their education moving alongside it. Coaches,
+        teachers, and guardians are welcome to reach out on a player's behalf.
+      </p>
+    </details>
+
+    <details class="faq__item">
+      <summary>Where does it take place?</summary>
+      <p>
+        Sessions are based around the founder's training environment and partner
+        schools/clubs. Exact venues will be confirmed with each intake — reach out and
+        we'll tell you what's possible in your area.
+      </p>
+    </details>
+
+    <details class="faq__item">
+      <summary>What's the time commitment?</summary>
+      <p>
+        The pilot is built around one season, with sessions designed to fit alongside
+        school and training schedules — not compete with them. A typical week will be
+        shared with interested players before the pilot begins.
+      </p>
+    </details>
+
+    <details class="faq__item">
+      <summary>Does this replace school or club training?</summary>
+      <p>
+        No. The Foundation is designed to sit alongside schoolwork and existing club
+        commitments, reinforcing both — not replacing either.
+      </p>
+    </details>
+
+    <details class="faq__item">
+      <summary>Is it safe? What about safeguarding?</summary>
+      <p>
+        Yes. The program is run with the same accountability expected of any youth
+        sports setting, and guardians are kept informed. A full safeguarding policy
+        will be shared with every family before the pilot starts.
+      </p>
+    </details>
+
+    <details class="faq__item">
+      <summary>How do I join or refer someone?</summary>
+      <p>
+        Use the "Join the Interest List" button below, or message the founder directly
+        on WhatsApp. Tell us who you are and how you're connected to the game — we'll
+        follow up about the next intake.
+      </p>
+    </details>
   </div>
 </section>
 
