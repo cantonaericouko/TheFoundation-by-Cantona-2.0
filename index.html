@@ -1276,5 +1276,38 @@
   spySections.forEach(s => { if (s) spyIO.observe(s); });
 </script>
 
+<!-- ===== STICKY MOBILE CTA ===== -->
+<div class="sticky-cta" id="stickyCta" aria-hidden="true">
+  <a href="#contact">Join the Interest List</a>
+</div>
+
+<script>
+  (function () {
+    var sticky = document.getElementById('stickyCta');
+    var cta = document.getElementById('contact');
+    if (!sticky || !cta) return;
+
+    var mobile = window.matchMedia('(max-width: 768px)');
+
+    // Hide the sticky bar once the real CTA is on screen
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        sticky.style.opacity = entry.isIntersecting ? '0' : '1';
+        sticky.style.pointerEvents = entry.isIntersecting ? 'none' : 'auto';
+      });
+    }, { threshold: 0.25 });
+
+    io.observe(cta);
+
+    // Only show on mobile, and only after scrolling past the hero
+    function update() {
+      if (!mobile.matches) { sticky.style.display = ''; return; }
+      sticky.style.display = window.scrollY > 400 ? 'block' : 'none';
+    }
+    window.addEventListener('scroll', update);
+    window.addEventListener('resize', update);
+    update();
+  })();
+</script>
 </body>
 </html>
