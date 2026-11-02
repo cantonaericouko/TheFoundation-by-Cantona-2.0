@@ -98,11 +98,32 @@
     display:flex; align-items:center; justify-content:center;
   }
   .brand-header{
-    display:flex; justify-content:center; padding:12px 24px;
+    display:flex; justify-content:center; padding:12px 24px 4px;
+    background: var(--pitch);
   }
   .brand-mark{ display:block; line-height:0; }
   .brand-mark img{
     width:240px; height:auto; display:block;
+    transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .35s ease;
+    animation: brandIn .9s ease-out backwards, brandGlow 2.4s ease-in-out .9s 2;
+  }
+  .brand-mark:hover img,
+  .brand-mark:focus-visible img{
+    transform: translateY(-4px) scale(1.05);
+    filter: drop-shadow(0 8px 22px rgba(214,168,92,0.5));
+  }
+  .brand-mark:active img{ transform: scale(0.97); }
+  .brand-mark:focus-visible{ outline:2px solid var(--ochre-bright); outline-offset:4px; border-radius:16px; }
+  @keyframes brandIn{
+    from{ opacity:0; transform:translateY(-14px) scale(.94); }
+    to{ opacity:1; transform:none; }
+  }
+  @keyframes brandGlow{
+    0%,100%{ filter:drop-shadow(0 0 0 rgba(214,168,92,0)); }
+    50%{ filter:drop-shadow(0 0 18px rgba(214,168,92,0.55)); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .brand-mark img{ animation:none; transition:none; }
   }
   .nav-links{ display:flex; gap:28px; }
   .nav-links a{
