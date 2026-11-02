@@ -30,16 +30,84 @@
   html{ scroll-behavior:smooth; }
   body{ background:var(--chalk); color:var(--ink); font-family:'Newsreader', serif; -webkit-font-smoothing:antialiased; }
   a{ color:inherit; }
-  .topbar{
-    background:var(--pitch); border-bottom:4px solid var(--ochre);
-    padding:16px 32px; display:flex; align-items:center; justify-content:space-between; gap:16px;
+  :root{ --line: rgba(247,245,239,0.14); }
+
+  /* ---------- BRAND HEADER + NAV (same as main page) ---------- */
+  .brand-header{
+    display:flex; justify-content:center; padding:12px 24px 4px;
+    background: var(--pitch);
   }
-  .topbar img{ height:64px; width:auto; display:block; }
-  .back{
-    font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.12em;
-    text-transform:uppercase; text-decoration:none; color:var(--chalk); opacity:0.85;
+  .brand-mark{ display:block; line-height:0; }
+  .brand-mark img{
+    width:240px; height:auto; display:block;
+    transition: transform .35s cubic-bezier(.2,.8,.2,1), filter .35s ease;
+    animation: brandIn .9s ease-out backwards, brandGlow 2.4s ease-in-out .9s 2;
   }
-  .back:hover{ color:var(--ochre-bright); opacity:1; }
+  .brand-mark:hover img,
+  .brand-mark:focus-visible img{
+    transform: translateY(-4px) scale(1.05);
+    filter: drop-shadow(0 8px 22px rgba(214,168,92,0.5));
+  }
+  .brand-mark:active img{ transform: scale(0.97); }
+  .brand-mark:focus-visible{ outline:2px solid var(--ochre-bright); outline-offset:4px; border-radius:16px; }
+  @keyframes brandIn{
+    from{ opacity:0; transform:translateY(-14px) scale(.94); }
+    to{ opacity:1; transform:none; }
+  }
+  @keyframes brandGlow{
+    0%,100%{ filter:drop-shadow(0 0 0 rgba(214,168,92,0)); }
+    50%{ filter:drop-shadow(0 0 18px rgba(214,168,92,0.55)); }
+  }
+  @media (prefers-reduced-motion: reduce){
+    .brand-mark img{ animation:none; transition:none; }
+  }
+  nav{
+    position:sticky; top:0; z-index:50;
+    background: rgba(31,61,43,0.96);
+    backdrop-filter: blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  #progressBar{
+    position:sticky; top:0; z-index:51; height:3px; width:0%;
+    background: linear-gradient(90deg, var(--ochre), var(--ochre-bright));
+    transition: width .1s linear;
+  }
+  .nav-inner{
+    max-width:1080px; margin:0 auto; padding:10px 32px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .nav-links{ display:flex; gap:28px; }
+  .nav-links a{
+    font-family:'IBM Plex Mono', monospace; font-size:0.72rem;
+    letter-spacing:0.12em; text-transform:uppercase; color:var(--chalk);
+    text-decoration:none; opacity:0.75; transition:opacity .2s;
+    position:relative;
+  }
+  .nav-links a::after{
+    content:""; position:absolute; left:0; bottom:-4px; width:0; height:1px;
+    background:var(--ochre-bright); transition:width .25s;
+  }
+  .nav-links a:hover{ opacity:1; color:var(--ochre-bright); }
+  .nav-links a:hover::after{ width:100%; }
+  .nav-links a.nav-cta{
+    opacity:1; background:var(--ochre); color:var(--pitch-dark);
+    padding:8px 16px; border-radius:2px; font-weight:600;
+  }
+  .nav-links a.nav-cta::after{ display:none; }
+  .nav-links a.nav-cta:hover{ background:var(--ochre-bright); color:var(--pitch-dark); }
+  .nav-toggle{ display:none; background:none; border:none; color:var(--chalk); font-size:1.4rem; cursor:pointer; }
+  @media (max-width:720px){
+    .nav-inner{ justify-content:flex-end; }
+    .nav-links{
+      position:absolute; top:100%; left:0; right:0;
+      background:var(--pitch); flex-direction:column; gap:0;
+      max-height:0; overflow:hidden; transition:max-height .3s ease;
+      border-bottom:1px solid var(--line);
+    }
+    .nav-links.open{ max-height:320px; }
+    .nav-links a{ padding:14px 32px; border-top:1px solid var(--line); opacity:1; }
+    .nav-toggle{ display:block; }
+  }
   .doc{ max-width:760px; margin:0 auto; padding:64px 32px 80px; }
   .eyebrow{
     font-family:'IBM Plex Mono', monospace; font-size:0.7rem; letter-spacing:0.22em;
@@ -88,16 +156,28 @@
   footer a{ color:var(--ochre-bright); text-decoration:none; }
   @media (max-width:560px){
     .doc{ padding:44px 22px 64px; }
-    .topbar{ padding:14px 22px; }
   }
 </style>
 </head>
 <body>
 
-<div class="topbar">
-  <a href="./" aria-label="The Foundation home"><img src="assets/icon-reversed-trimmed.png" alt="The Foundation" width="52" height="64"></a>
-  <a class="back" href="./">← Back to the site</a>
+<div class="brand-header" id="top">
+  <a class="brand-mark" href="./" aria-label="The Foundation home"><img src="assets/logo-stacked-reversed.png" alt="The Foundation by Cantona Ouko" width="240" height="182"></a>
 </div>
+<nav>
+  <div class="nav-inner">
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="./#values">Values</a>
+      <a href="./#story">Journey</a>
+      <a href="./#pillars">Program</a>
+      <a href="./#audience">Who It's For</a>
+      <a href="./#pilot">Season Zero</a>
+      <a href="./#contact" class="nav-cta">Get Involved</a>
+    </div>
+  </div>
+</nav>
+<div id="progressBar"></div>
 
 <main class="doc">
   <div class="eyebrow">The Foundation</div>
@@ -239,6 +319,22 @@
 <footer>
   <a href="./">THE FOUNDATION</a> &nbsp;·&nbsp; MENTORSHIP BY THE FOUNDER
 </footer>
+
+<script>
+  // mobile nav
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => links.classList.toggle('open'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+
+  // scroll progress bar
+  const progressBar = document.getElementById('progressBar');
+  window.addEventListener('scroll', () => {
+    const h = document.documentElement;
+    const scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    progressBar.style.width = scrolled + '%';
+  });
+</script>
 
 </body>
 </html>
