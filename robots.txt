@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://thefoundation.ke/sitemap.xml
+Sitemap: https://cantonaericouko.github.io/TheFoundation-by-Cantona-2.0/sitemap.xml

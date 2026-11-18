@@ -5,19 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Foundation — Mentorship by The Founder</title>
 <meta name="description" content="The Foundation is a mentorship program for young rugby players — built on the road from a high school pitch to a starting jersey, where a player's education matters as much as his game.">
-<link rel="canonical" href="https://thefoundation.ke/">
+<link rel="canonical" href="https://cantonaericouko.github.io/TheFoundation-by-Cantona-2.0/">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://thefoundation.ke/">
+<meta property="og:url" content="https://cantonaericouko.github.io/TheFoundation-by-Cantona-2.0/">
 <meta property="og:title" content="The Foundation — Mentorship for Young Rugby Players">
 <meta property="og:description" content="Every starter was once a walk-on. A mentorship program built so young players can chase the game hard without sacrificing their education.">
-<meta property="og:image" content="https://thefoundation.ke/assets/og-image-1200x630.png">
+<meta property="og:image" content="https://cantonaericouko.github.io/TheFoundation-by-Cantona-2.0/assets/og-image-1200x630.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="The Foundation by Cantona Ouko — boots hanging over an open book on a stack of books">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="The Foundation — Mentorship for Young Rugby Players">
 <meta name="twitter:description" content="Every starter was once a walk-on. A mentorship program built so young players can chase the game hard without sacrificing their education.">
-<meta name="twitter:image" content="https://thefoundation.ke/assets/og-image-1200x630.png">
+<meta name="twitter:image" content="https://cantonaericouko.github.io/TheFoundation-by-Cantona-2.0/assets/og-image-1200x630.png">
 <link rel="icon" href="assets/favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
@@ -1016,6 +1016,11 @@
   .sticky-cta a:hover {
     background: var(--ochre-bright);
   }
+  #toTop {
+    bottom: calc(76px + env(safe-area-inset-bottom));
+    right: 18px;
+    z-index: 1000;
+  }
   body { padding-bottom: 90px; }
 }
 
@@ -1026,7 +1031,7 @@
   "@graph": [
     {
       "@type": "Person",
-      "@id": "https://thefoundation.ke/#founder",
+      "@id": "https://cantonaericouko.github.io/TheFoundation-by-Cantona-2.0/#founder",
       "name": "Cantona Eric Ouko",
       "jobTitle": "Founder & Rugby Athlete",
       "affiliation": {
@@ -1045,17 +1050,17 @@
     },
     {
       "@type": "SportsOrganization",
-      "@id": "https://thefoundation.ke/#organization",
+      "@id": "https://cantonaericouko.github.io/TheFoundation-by-Cantona-2.0/#organization",
       "name": "The Foundation by Cantona",
-      "url": "https://thefoundation.ke/",
+      "url": "https://cantonaericouko.github.io/TheFoundation-by-Cantona-2.0/",
       "founder": {
-        "@id": "https://thefoundation.ke/#founder"
+        "@id": "https://cantonaericouko.github.io/TheFoundation-by-Cantona-2.0/#founder"
       },
       "description": "Mentorship program for young rugby players bridging athletic performance and academic education."
     },
     {
       "@type": "FAQPage",
-      "@id": "https://thefoundation.ke/#faq",
+      "@id": "https://cantonaericouko.github.io/TheFoundation-by-Cantona-2.0/#faq",
       "mainEntity": [
         {
           "@type": "Question",
@@ -1078,7 +1083,7 @@
           "name": "Where does it take place?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Sessions are based around the founder's training environment and partner schools/clubs. Exact venues will be confirmed with each intake — reach out and we'll tell you what's possible in your area."
+            "text": "The Season Zero pilot is running in Kakamega and expanding to a partner school cohort in Nairobi. Sessions take place at partner school grounds and training venues. Reach out via WhatsApp or the interest list to check venue and intake details for your area."
           }
         },
         {
@@ -1086,7 +1091,7 @@
           "name": "What's the time commitment?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "The pilot is built around one season, with sessions designed to fit alongside school and training schedules — not compete with them."
+            "text": "The pilot is a 6–8 week season with weekly ~90-minute weekend sessions structured around the Kenyan school calendar and CBC term dates. Academic check-ins and peer study groups fit alongside schoolwork rather than competing with it."
           }
         },
         {
@@ -1118,7 +1123,7 @@
 </div>
 <nav>
   <div class="nav-inner">
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">☰</button>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
     <div class="nav-links" id="navLinks">
       <a href="#values">Values</a>
       <a href="#story">Journey</a>
@@ -1196,6 +1201,8 @@
     src="action-kick.jpg"
     alt="Cantona Eric Ouko on the field"
     class="bio-strip__photo"
+    width="1600"
+    height="1066"
     loading="lazy"
   />
   <div class="bio-strip__text">
@@ -1287,12 +1294,12 @@
       <div class="pillar">
         <div class="pos">03 — Off the field</div>
         <h3>Education &amp; career, alongside the game</h3>
-        <p>Education isn't set aside for rugby here — it's carried alongside it. Practical guidance on keeping a degree or schoolwork moving at the same pace as the game, drawn from actually doing both at once.</p>
+        <p>Education isn't set aside for rugby here — it's carried alongside it. CBC-aligned academic support, peer tutoring, and practical guidance on keeping schoolwork moving at the same pace as the game, drawn from actually doing both at once.</p>
       </div>
       <div class="pillar">
         <div class="pos">04 — The engine</div>
         <h3>Fitness &amp; conditioning</h3>
-        <p>Foundational conditioning principles a young player can actually keep up between sessions.</p>
+        <p>Foundational conditioning principles and a structured 3-phase athletic progression (Base, Skills, Match-Ready) that players can safely maintain between sessions.</p>
       </div>
     </div>
   </div>
@@ -1312,19 +1319,19 @@
     </div>
     <div class="gallery-grid reveal-stagger">
       <div class="g-item">
-        <img src="action-kick-match.jpg" alt="Cantona Eric Ouko taking a kick off the tee during a Kabras match" loading="lazy">
+        <img src="action-kick-match.jpg" alt="Cantona Eric Ouko taking a kick off the tee during a Kabras match" width="1024" height="682" loading="lazy">
         <div class="g-caption">Match day — Kabras RFC</div>
       </div>
       <div class="g-item">
-        <img src="trophy.jpg" alt="The founder holding the Kenya Cup Top Point Scorer award" loading="lazy">
+        <img src="trophy.jpg" alt="The founder holding the Kenya Cup Top Point Scorer award" width="1600" height="1067" loading="lazy">
         <div class="g-caption">Kenya Cup — Top Point Scorer</div>
       </div>
       <div class="g-item">
-        <img src="team-champions.jpg" alt="Kabras RFC team hoisting the Kampala 7s championship trophy" loading="lazy">
+        <img src="team-champions.jpg" alt="Kabras RFC team hoisting the Kampala 7s championship trophy" width="1024" height="682" loading="lazy">
         <div class="g-caption">Champions — Kampala 7s Title</div>
       </div>
       <div class="g-item">
-        <img src="action-throw.jpg" alt="The founder directing play on the pitch" loading="lazy">
+        <img src="action-throw.jpg" alt="The founder directing play on the pitch" width="1600" height="1066" loading="lazy">
         <div class="g-caption">Reading the game</div>
       </div>
     </div>
@@ -1375,12 +1382,13 @@
       <div>
         <span class="pilot-badge">Season Zero — In Planning</span>
         <h3>A small pilot group before The Foundation opens more widely</h3>
-        <p>The program is being tested first with a small group, one season, before it takes on a fixed name and structure — so what launches publicly is proven, not just promised.</p>
+        <p>The program is being tested first with a small cohort — currently active in Kakamega and expanding to a partner school in Nairobi — so what launches publicly is proven, not just promised.</p>
       </div>
       <div class="pilot-meta">
         <div>Group size <span>8–12 players</span></div>
         <div>Length <span>6–8 weeks</span></div>
         <div>Cadence <span>Weekly, ~90 min</span></div>
+        <div>Locations <span>Kakamega → Nairobi</span></div>
         <a href="#contact" class="btn-primary" style="text-align:center; margin-top:6px;">Register Interest</a>
       </div>
     </div>
@@ -1416,18 +1424,14 @@
     <details class="faq__item">
       <summary>Where does it take place?</summary>
       <p>
-        Sessions are based around the founder's training environment and partner
-        schools/clubs. Exact venues will be confirmed with each intake — reach out and
-        we'll tell you what's possible in your area.
+        The Season Zero pilot is running in <strong>Kakamega</strong> and expanding to a partner school cohort in <strong>Nairobi</strong>. Sessions take place at partner school grounds and training venues. Reach out and we'll share intake details for your area.
       </p>
     </details>
 
     <details class="faq__item">
       <summary>What's the time commitment?</summary>
       <p>
-        The pilot is built around one season, with sessions designed to fit alongside
-        school and training schedules — not compete with them. A typical week will be
-        shared with interested players before the pilot begins.
+        The pilot is a 6–8 week season with weekly ~90-minute weekend sessions structured around the Kenyan school calendar and CBC term dates. Academic check-ins and peer study support are designed to fit alongside schoolwork — not compete with it.
       </p>
     </details>
 
@@ -1577,8 +1581,16 @@
   // mobile nav
   const toggle = document.getElementById('navToggle');
   const links = document.getElementById('navLinks');
-  toggle.addEventListener('click', () => links.classList.toggle('open'));
-  document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => links.classList.remove('open')));
+  if (toggle && links) {
+    toggle.addEventListener('click', () => {
+      const open = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => {
+      links.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+    }));
+  }
 
   // scroll reveal
   const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
